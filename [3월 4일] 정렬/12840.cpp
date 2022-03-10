@@ -3,11 +3,15 @@
 
 using namespace std;
 
+const int HR_TO_SEC = 3600;
+const int MIN_TO_SEC = 60;
+const int DAY_TO_SEC = 86400;   //상수 선언
+
 void sectotime(int cho) {
 	int h, m, s;
-	h = cho / 3600;
-	m = (cho % 3600) / 60;
-	s = cho % 60;
+	h = cho / HR_TO_SEC;
+	m = (cho % HR_TO_SEC) / MIN_TO_SEC;
+	s = cho % MIN_TO_SEC;
 	cout << h << ' ' << m << ' ' << s << '\n';
 }
 int main() {
@@ -15,20 +19,20 @@ int main() {
 	int cho;
 	cin >> h >> m >> s >> q;
 	vector<int> sec;
-	cho = h * 3600 + m * 60 + s; //초 저장
+	cho = h * HR_TO_SEC + m * MIN_TO_SEC + s; //초 저장
 
 	for (int i = 0; i < q; i++) {
 		cin >> T;
 		if (T == 1) { //초 증가
 			cin >> c;
 			cho += c;
-			cho %= 86400;
+			cho %= DAY_TO_SEC;
 		}
 		if (T == 2) { //초 감소
 			cin >> c;
 			cho -= c;
-			while (cho < 0) cho += 86400;
-			cho %= 86400;
+			while (cho < 0) cho += DAY_TO_SEC;
+			cho %= DAY_TO_SEC;
 		}
 		if (T == 3) { //시간 출력
 			sec.push_back(cho);
